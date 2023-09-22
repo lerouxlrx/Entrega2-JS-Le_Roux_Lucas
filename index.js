@@ -27,7 +27,7 @@ imprimirLog('E-mail: '+email);
 
 const sumaChances = prompt ('Gracias por participar, enviaremos los resultados a '+email+'. Tenes 1 chance, contesta unas preguntas y suma más! Responde "SI", si queres aumentar tus chances: ');
 
-if (sumaChances.toLowerCase() == 'si') {
+if (sumaChances.toLocaleLowerCase() == 'si') {
     alert ('Responde del 1 al 5 siendo 1 Nada Importante y 5 Muy Importante. Empecemos!');
     imprimirLog ('Suma Chances: '+sumaChances);
 
