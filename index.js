@@ -6,6 +6,7 @@ let chances = 1;
 let pregRespondidas = 0;
 let numGanador = Math.floor(Math.random() * 10) + 1;
 let ganador = false;
+let numElegido
 function sumatoriaChances (pregunta) {
     if (pregunta != 0) {
         chances++;
@@ -141,10 +142,12 @@ function comoContinuar () {
         } while (!validadorRespuesta(1,2,sinContactos))
     } else if (Contactos.length == 1){
         do {
+            sinContactos = ''
             conContactos = prompt ('Se registro '+Contactos.length+' contacto. Como continuamos?\nResponde utilizando los numeros:\n1. Ir a crear actividades sobre contacto\n2. Ir a crear otros contactos.\n3. Finalizar prueba.')
         } while (!validadorRespuesta(1,3,conContactos))
     } else {
         do {
+            sinContactos = ''
             conContactos = prompt ('Se registraron '+Contactos.length+' contactos. Como continuamos?\nResponde utilizando los numeros:\n1. Ir a crear actividades sobre contactos\n2. Ir a crear otros contactos.\n3. Finalizar prueba.')
        } while (!validadorRespuesta(1,3,conContactos))
     }
@@ -160,15 +163,16 @@ function mostrarNombres() {
         return listaNombres;
     }
 
-function agregarActividad() {
+function crearActividad() {
     let listaContactos = mostrarNombres()   
-    let contactoEncontrado 
+    let contactoEncontrado
+    let crearActividad
     do {
         let nombreBuscado = prompt('Los nombres de tus contactos son: '+listaContactos+'\nEscribi el nombre a quien quieras cargarle una actividad: ')
         contactoEncontrado = Contactos.find(Contacto => Contacto.nombre === nombreBuscado.toLocaleUpperCase());
         if (contactoEncontrado) {
-        let posicion = Contactos.indexOf(contactoEncontrado);
-        let crearActividad = prompt('Escribi la actividad que queres agregar: ')
+        let nuevaActividad = prompt('Escribi la actividad que queres agregar: ')
+        contactoEncontrado.agregarActividad(nuevaActividad);
         } else {
         alert ('Nombre no encontrado.')
         contactoEncontrado = 1
@@ -194,9 +198,9 @@ do {
       saludoFinal()
       break
     } else if(conContactos == 1) {
-        agregarActividad()
+        crearActividad()
         comoContinuar()
     }
 } while(sinContactos !==2 || conContactos !== 3)
 
-
+imprimirLog (Contactos)
